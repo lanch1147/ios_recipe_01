@@ -7,18 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6682F00326EF363F008264AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682F00226EF363F008264AF /* ViewController.swift */; };
+		6682F00326EF363F008264AF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682F00226EF363F008264AF /* HomeViewController.swift */; };
 		6682F00626EF363F008264AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6682F00426EF363F008264AF /* Main.storyboard */; };
 		6682F00926EF3640008264AF /* Recipe_Search.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6682F00726EF3640008264AF /* Recipe_Search.xcdatamodeld */; };
 		6682F00B26EF3644008264AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6682F00A26EF3644008264AF /* Assets.xcassets */; };
 		6682F00E26EF3644008264AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6682F00C26EF3644008264AF /* LaunchScreen.storyboard */; };
 		6682F02526EF4B00008264AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682F02326EF4B00008264AF /* SceneDelegate.swift */; };
 		6682F02626EF4B00008264AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682F02426EF4B00008264AF /* AppDelegate.swift */; };
+		6682F05326F03670008264AF /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682F05226F03670008264AF /* FavoriteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6682EFFB26EF363F008264AF /* Recipe Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recipe Search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6682F00226EF363F008264AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6682F00226EF363F008264AF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6682F00526EF363F008264AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6682F00826EF3640008264AF /* Recipe_Search.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Recipe_Search.xcdatamodel; sourceTree = "<group>"; };
 		6682F00A26EF3644008264AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -26,6 +27,7 @@
 		6682F00F26EF3644008264AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6682F02326EF4B00008264AF /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6682F02426EF4B00008264AF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6682F05226F03670008264AF /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +72,8 @@
 		6682F01826EF36D5008264AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6682F00226EF363F008264AF /* ViewController.swift */,
+				6682F00226EF363F008264AF /* HomeViewController.swift */,
+				6682F05226F03670008264AF /* FavoriteViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -219,9 +222,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6682F02626EF4B00008264AF /* AppDelegate.swift in Sources */,
-				6682F00326EF363F008264AF /* ViewController.swift in Sources */,
+				6682F00326EF363F008264AF /* HomeViewController.swift in Sources */,
 				6682F00926EF3640008264AF /* Recipe_Search.xcdatamodeld in Sources */,
 				6682F02526EF4B00008264AF /* SceneDelegate.swift in Sources */,
+				6682F05326F03670008264AF /* FavoriteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

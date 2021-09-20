@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecipeResponse: Decodable {
+class RecipeResponse: Decodable {
     var startIndex: Int
     var endIndex: Int
     var total: Int
@@ -27,7 +27,7 @@ struct RecipeResponse: Decodable {
         case nextPageURL = "href"
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: OuterKeys.self)
         
         startIndex = try container.decode(Int.self, forKey: .startIndex)

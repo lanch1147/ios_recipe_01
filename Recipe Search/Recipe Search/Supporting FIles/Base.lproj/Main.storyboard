@@ -73,10 +73,32 @@
                     <view key="view" contentMode="scaleToFill" id="sDc-jG-WX9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m6J-jB-87Q">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2SA-3a-Ule">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Vbm-wV-b7Y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="m6J-jB-87Q" firstAttribute="leading" secondItem="Vbm-wV-b7Y" secondAttribute="leading" id="0MQ-Hz-gkI"/>
+                            <constraint firstItem="m6J-jB-87Q" firstAttribute="top" secondItem="Vbm-wV-b7Y" secondAttribute="top" id="nQ5-1E-DTb"/>
+                            <constraint firstItem="Vbm-wV-b7Y" firstAttribute="bottom" secondItem="m6J-jB-87Q" secondAttribute="bottom" id="txx-wX-FhM"/>
+                            <constraint firstItem="Vbm-wV-b7Y" firstAttribute="trailing" secondItem="m6J-jB-87Q" secondAttribute="trailing" id="zlG-jc-55p"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LZp-nk-zD8"/>
+                    <connections>
+                        <outlet property="collectionView" destination="m6J-jB-87Q" id="uYo-13-I8X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDZ-lU-L6Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

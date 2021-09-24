@@ -29,7 +29,11 @@ struct RecipeRequest: APIRequest {
     var recipeName: String?
     var categories: [Category]
     var selectedFields: [Field]
+    var completeURL: URL?
     var urlRequest: URLRequest {
+        if let completeURL = completeURL {
+            return URLRequest(url: completeURL)
+        }
         var components = baseComponent
         if let recipeName = recipeName {
             components.queryItems?.append(URLQueryItem(name: "q", value: recipeName))
@@ -47,6 +51,12 @@ struct RecipeRequest: APIRequest {
         self.recipeName = recipeName
         self.categories = categories
         self.selectedFields = selectedFields
+    }
+    
+    init(completeURL: URL) {
+        self.completeURL = completeURL
+        categories = []
+        selectedFields = []
     }
     
     func decodeResponse(from data: Data) throws -> RecipeResponse {

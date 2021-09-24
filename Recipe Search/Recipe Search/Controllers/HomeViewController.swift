@@ -139,12 +139,11 @@ final class HomeViewController: UIViewController {
     
     @IBSegueAction func viewResultScreen(_ coder: NSCoder, sender: Any?) -> ResultViewController? {
         guard let header = sender as? HomeScreenReusableHeader,
-              let indexPath = header.indexPath,
-              let response = sections[indexPath.section].response
+              let indexPath = header.indexPath
         else {
             return nil
         }
-        return ResultViewController(coder: coder, recipeResponse: response)
+        return ResultViewController(coder: coder, initalRequest: sections[indexPath.section].request)
     }
 }
 

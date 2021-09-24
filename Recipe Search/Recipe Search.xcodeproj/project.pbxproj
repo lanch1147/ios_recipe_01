@@ -42,6 +42,7 @@
 		66F3307F26FD64FE00AE9E6F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F3307E26FD64FE00AE9E6F /* SearchViewController.swift */; };
 		66F3308326FD6BF400AE9E6F /* HomeScreenReusableHeaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F3308226FD6BF400AE9E6F /* HomeScreenReusableHeaderDelegate.swift */; };
 		66F3308626FD6F7E00AE9E6F /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F3308526FD6F7E00AE9E6F /* ResultViewController.swift */; };
+		66F3308A26FDB95600AE9E6F /* UIScrollView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F3308926FDB95500AE9E6F /* UIScrollView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		66F3307E26FD64FE00AE9E6F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		66F3308226FD6BF400AE9E6F /* HomeScreenReusableHeaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenReusableHeaderDelegate.swift; sourceTree = "<group>"; };
 		66F3308526FD6F7E00AE9E6F /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		66F3308926FDB95500AE9E6F /* UIScrollView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,7 @@
 				66F3300326F9762700AE9E6F /* UISearchBar+.swift */,
 				66F3301126F9922400AE9E6F /* UICollectionView+.swift */,
 				66F3307226FCDDE700AE9E6F /* UIImage+.swift */,
+				66F3308926FDB95500AE9E6F /* UIScrollView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				66F32FFD26F8875D00AE9E6F /* HomeScreenReusableHeader.swift in Sources */,
 				6682F00926EF3640008264AF /* Recipe_Search.xcdatamodeld in Sources */,
 				66F3302F26FA208F00AE9E6F /* RecipeConfigurableCell+Protocol.swift in Sources */,
+				66F3308A26FDB95600AE9E6F /* UIScrollView+.swift in Sources */,
 				66F3307626FCDE1500AE9E6F /* UIImageLoader.swift in Sources */,
 				66F32FDD26F85CBE00AE9E6F /* APIFetcher.swift in Sources */,
 				66F32FE126F85CE000AE9E6F /* APIRequestProtocol.swift in Sources */,

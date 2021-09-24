@@ -33,6 +33,9 @@
                                 <imageReference key="image" image="chevron.right" catalog="system" symbolScale="default"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="medium"/>
                             </state>
+                            <connections>
+                                <action selector="viewAllButtonPressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="gkf-3e-nfD"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

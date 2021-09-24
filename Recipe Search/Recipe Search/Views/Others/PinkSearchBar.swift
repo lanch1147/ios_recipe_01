@@ -17,8 +17,6 @@ class PinkSearchBar: UISearchBar {
         searchTextField.textColor = .white
         setClearButtonColor(with: .white)
         
-        searchTextField.font = .systemFont(ofSize: 17, weight: .medium)
-        
         let searchFieldHeight = searchTextField.frame.height
         searchTextField.layer.cornerRadius = searchFieldHeight / 2
         searchTextField.clipsToBounds = true

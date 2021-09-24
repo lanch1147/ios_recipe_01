@@ -41,11 +41,46 @@
                     <navigationItem key="navigationItem" id="yn2-dJ-N7q"/>
                     <connections>
                         <outlet property="collectionView" destination="wxx-Qh-e6O" id="kRS-zg-hR5"/>
+                        <segue destination="ztN-YJ-f45" kind="show" identifier="ShowDetailFromHomeSegue" destinationCreationSelector="viewDetailScreen:sender:" id="Zwx-fN-nfp"/>
+                        <segue destination="Tqz-hZ-8fb" kind="show" identifier="ShowSearchScreenSegue" id="T3l-1q-ztN"/>
+                        <segue destination="Fhb-VU-F6N" kind="show" identifier="ShowResultScreenFromHomeSegue" destinationCreationSelector="viewResultScreen:sender:" id="YKM-Xd-IP9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1539.1304347826087" y="105.80357142857143"/>
+            <point key="canvasLocation" x="1539" y="106"/>
+        </scene>
+        <!--Recipe Detail View Controller-->
+        <scene sceneID="Fjk-3l-LnM">
+            <objects>
+                <viewController id="ztN-YJ-f45" customClass="RecipeDetailViewController" customModule="Recipe_Search" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sYw-Bn-qSE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Gv2-yk-8fP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aDK-3B-eZ7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TKr-Pb-awK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2512" y="497"/>
+        </scene>
+        <!--Result View Controller-->
+        <scene sceneID="bhp-fa-gG9">
+            <objects>
+                <viewController id="Fhb-VU-F6N" customClass="ResultViewController" customModule="Recipe_Search" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sDc-jG-WX9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Vbm-wV-b7Y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LZp-nk-zD8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cDZ-lU-L6Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3428" y="106"/>
         </scene>
         <!--Favorite View Controller-->
         <scene sceneID="PBC-jv-Gil">
@@ -61,7 +96,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yeH-Bc-AfP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1539.1304347826087" y="780.80357142857144"/>
+            <point key="canvasLocation" x="1538" y="1014"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="SS0-vo-YNb">
+            <objects>
+                <viewController id="Tqz-hZ-8fb" customClass="SearchViewController" customModule="Recipe_Search" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iz5-qr-zbV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="UaE-ga-wX7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qIV-nY-EUj"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cQU-po-48H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2512" y="-263"/>
         </scene>
         <!--Home-->
         <scene sceneID="gol-4C-X1S">
@@ -106,7 +157,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xEE-SX-bjq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="628.98550724637687" y="780.80357142857144"/>
+            <point key="canvasLocation" x="629" y="1014"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="q4j-bg-7w6">

@@ -33,6 +33,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupCollectionView() {
+        collectionView.delegate = self
         collectionView.dataSource = self
         registerNibs()
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
@@ -41,6 +42,7 @@ final class HomeViewController: UIViewController {
     // MARK: - Navigation Bar
     
     private func setupSearchBar() {
+        searchBar.delegate = self
         let attPlaceholder = NSAttributedString(string: "Search for recipes",
                                                 attributes: [.foregroundColor: UIColor.white])
         searchBar.searchTextField.attributedPlaceholder = attPlaceholder
@@ -53,7 +55,6 @@ final class HomeViewController: UIViewController {
         appearance.titleTextAttributes = [.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.isTranslucent = false
         
         setupSearchBar()
         navigationItem.titleView = searchBar
@@ -73,7 +74,7 @@ final class HomeViewController: UIViewController {
         static let standardGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.35),
                                                              heightDimension: .absolute(214))
         static let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                           heightDimension: .estimated(44))
+                                                           heightDimension: .absolute(61.5))
     }
     
     func generateFullWidthItemSection() -> NSCollectionLayoutSection {
@@ -122,6 +123,28 @@ final class HomeViewController: UIViewController {
             return section
         }
         return layout
+    }
+    
+    // MARK: - Segue Actions
+    
+    @IBSegueAction func viewDetailScreen(_ coder: NSCoder, sender: Any?) -> RecipeDetailViewController? {
+        guard let cell = sender as? UICollectionViewCell,
+              let indexPath = collectionView.indexPath(for: cell),
+              let recipe = sections[indexPath.section].response?.recipes[indexPath.item]
+        else {
+            return nil
+        }
+        return RecipeDetailViewController(coder: coder, recipe: recipe)
+    }
+    
+    @IBSegueAction func viewResultScreen(_ coder: NSCoder, sender: Any?) -> ResultViewController? {
+        guard let header = sender as? HomeScreenReusableHeader,
+              let indexPath = header.indexPath,
+              let response = sections[indexPath.section].response
+        else {
+            return nil
+        }
+        return ResultViewController(coder: coder, recipeResponse: response)
     }
 }
 
@@ -192,7 +215,28 @@ extension HomeViewController: UICollectionViewDataSource {
                         at indexPath: IndexPath) -> UICollectionReusableView {
         let kind = SupplementaryViewKind.header.rawValue
         let header = collectionView.dequeueView(ofType: HomeScreenReusableHeader.self, forKind: kind, at: indexPath)
-        header.configure(with: sections[indexPath.section].name)
+        header.delegate = self
+        header.configure(with: sections[indexPath.section].name, at: indexPath)
         return header
+    }
+}
+
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "ShowDetailFromHomeSegue", sender: collectionView.cellForItem(at: indexPath))
+    }
+}
+
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        performSegue(withIdentifier: "ShowSearchScreenSegue", sender: nil)
+        return false
+    }
+}
+
+extension HomeViewController: HomeScreenReusableHeaderDelegate {
+    func didPressViewAllButton(sender: HomeScreenReusableHeader, at indexPath: IndexPath) {
+        guard sections[indexPath.row].response != nil else { return }
+        performSegue(withIdentifier: "ShowResultScreenFromHomeSegue", sender: sender)
     }
 }

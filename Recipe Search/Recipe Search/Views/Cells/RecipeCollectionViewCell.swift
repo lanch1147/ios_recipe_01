@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RecipeCollectionViewCell: UICollectionViewCell, ReusableView {
+final class RecipeCollectionViewCell: UICollectionViewCell, ReusableView, RecipeConfigurableCell {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
 
@@ -20,5 +20,14 @@ final class RecipeCollectionViewCell: UICollectionViewCell, ReusableView {
     func configure(with recipe: Recipe) {
         imageView.image = nil
         titleLabel.text = recipe.name
+        
+        guard let imageURL = recipe.imageURL else { return }
+        imageView.load(with: imageURL)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.cancelRemainingLoadingTask()
+        imageView.image = nil
     }
 }

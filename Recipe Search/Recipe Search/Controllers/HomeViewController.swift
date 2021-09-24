@@ -10,11 +10,13 @@ import UIKit
 final class HomeViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     private let searchBar = PinkSearchBar()
+    private var sections = [HomeScreenSection]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBarAppearance()
         setupCollectionView()
+        fetchSectionData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,7 +50,7 @@ final class HomeViewController: UIViewController {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .white
         appearance.shadowColor = .clear
-        appearance.titleTextAttributes = [.font: UIFont.systemFont(ofSize: 20, weight: .bold)]
+        appearance.titleTextAttributes = [.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.isTranslucent = false
@@ -124,26 +126,73 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        5
+    
+    private func createBaseSectionArray() -> [HomeScreenSection] {
+        var baseSections = [HomeScreenSection]()
+        
+        let popularRequest = RecipeRequest(recipeName: "popular")
+        let popularSection = HomeScreenSection(name: "Popular", request: popularRequest, response: nil)
+        baseSections.append(popularSection)
+        let categories: [Category] = [Cuisine.american, Cuisine.japanese, Meal.breakfast, DishType.desserts]
+        baseSections += categories.map {
+            let request = RecipeRequest(categories: [$0])
+            let standardSection = HomeScreenSection(name: $0.name(), request: request, response: nil)
+            return standardSection
+        }
+        
+        return baseSections
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section {
-        case 0:
-            return collectionView.dequeueCell(ofType: LargeRecipeCollectionViewCell.self, at: indexPath)
-        default:
-            return collectionView.dequeueCell(ofType: RecipeCollectionViewCell.self, at: indexPath)
+    private func fetchSectionData() {
+        sections = createBaseSectionArray()
+        let dispatchGroup = DispatchGroup()
+        for section in 0..<sections.count {
+            dispatchGroup.enter()
+            APIFetcher.shared.fetchData(with: sections[section].request) { [weak self] (result) in
+                switch result {
+                case .success(let recipeResponse):
+                    self?.sections[section].response = recipeResponse
+                case .failure(let error):
+                    print(error)
+                }
+                dispatchGroup.leave()
+            }
+        }
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            self?.collectionView.reloadData()
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return sections.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let response = sections[section].response
+        return response?.recipes.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: RecipeConfigurableCell
+        switch indexPath.section {
+        case 0:
+            cell = collectionView.dequeueCell(ofType: LargeRecipeCollectionViewCell.self, at: indexPath)
+        default:
+            cell = collectionView.dequeueCell(ofType: RecipeCollectionViewCell.self, at: indexPath)
+        }
+        
+        let response = sections[indexPath.section].response
+        guard let recipe = response?.recipes[indexPath.item] else { return cell }
+        cell.configure(with: recipe)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
         let kind = SupplementaryViewKind.header.rawValue
         let header = collectionView.dequeueView(ofType: HomeScreenReusableHeader.self, forKind: kind, at: indexPath)
+        header.configure(with: sections[indexPath.section].name)
         return header
     }
 }

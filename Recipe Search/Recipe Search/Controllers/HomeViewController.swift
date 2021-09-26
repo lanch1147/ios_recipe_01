@@ -52,12 +52,15 @@ final class HomeViewController: UIViewController {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .white
         appearance.shadowColor = .clear
-        appearance.titleTextAttributes = [.font: UIFont.systemFont(ofSize: 17, weight: .bold)]
+        appearance.titleTextAttributes = [.font: UIFont.systemFont(ofSize: 20, weight: .semibold)]
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         setupSearchBar()
         navigationItem.titleView = searchBar
+        let backBarItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        backBarItem.tintColor = .customPinkColor
+        navigationItem.backBarButtonItem = backBarItem
     }
     
     // MARK: - Compositional Layout
@@ -143,7 +146,10 @@ final class HomeViewController: UIViewController {
         else {
             return nil
         }
-        return ResultViewController(coder: coder, initalRequest: sections[indexPath.section].request)
+        let title = sections[indexPath.section].name
+        return ResultViewController(coder: coder,
+                                    initalRequest: sections[indexPath.section].request,
+                                    title: title)
     }
 }
 

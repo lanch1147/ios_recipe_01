@@ -15,9 +15,10 @@ final class ResultViewController: UIViewController {
     private var nextPageURL: URL?
     private var isFetching = false
     
-    init?(coder: NSCoder, initalRequest: RecipeRequest) {
+    init?(coder: NSCoder, initalRequest: RecipeRequest, title: String?) {
         self.initialRequest = initalRequest
         super.init(coder: coder)
+        self.title = title
     }
     
     required init?(coder: NSCoder) {
@@ -30,44 +31,51 @@ final class ResultViewController: UIViewController {
         fetchNextPage(with: initialRequest)
     }
     
+    private enum LayoutOptions {
+        static let defaultPadding: CGFloat = 15
+        static let itemHeight: CGFloat = 255
+    }
+    
     func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.registerCell(ofType: RecipeCollectionViewCell.self)
-        collectionView.setCollectionViewLayout(generateLayout(), animated: true)
+        collectionView.registerSupplementaryView(ofType: LoadingReusableFooter.self,
+                                                 forKind: UICollectionView.elementKindSectionFooter)
+        collectionView.setCollectionViewLayout(generateFlowLayout(), animated: true)
     }
     
-    func generateLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/2),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(300))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
-        group.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        group.interItemSpacing = .fixed(10)
-        let section = NSCollectionLayoutSection(group: group)
-        let layout = UICollectionViewCompositionalLayout(section: section)
+    func generateFlowLayout() -> UICollectionViewFlowLayout {
+        let padding = LayoutOptions.defaultPadding
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: padding,
+                                           left: padding,
+                                           bottom: padding,
+                                           right: padding)
+        let itemWidth = (view.frame.size.width - padding * 3) / 2
+        layout.itemSize = CGSize(width: itemWidth, height: LayoutOptions.itemHeight)
         return layout
     }
 }
 
 extension ResultViewController: UICollectionViewDataSource {
     private func fetchNextPage(with request: RecipeRequest) {
-        isFetching = true
+        self.isFetching = true
+        self.collectionView.reloadData()
         APIFetcher.shared.fetchData(with: request) { [weak self] (result) in
             guard let self = self else { return }
-            self.isFetching = false
             switch result {
             case .success(let response):
+                self.recipes += response.recipes
+                self.nextPageURL = response.nextPageURL
                 DispatchQueue.main.async {
-                    self.recipes += response.recipes
-                    self.nextPageURL = response.nextPageURL
                     self.collectionView.reloadData()
                 }
             case .failure(let error):
                 print(error)
             }
+            self.isFetching = false
         }
     }
     
@@ -80,6 +88,16 @@ extension ResultViewController: UICollectionViewDataSource {
         cell.configure(with: recipes[indexPath.item])
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        let footer = collectionView.dequeueView(ofType: LoadingReusableFooter.self,
+                                                forKind: UICollectionView.elementKindSectionFooter,
+                                                at: indexPath)
+        footer.startAnimating()
+        return footer
+    }
 }
 
 extension ResultViewController: UICollectionViewDelegate {
@@ -88,5 +106,13 @@ extension ResultViewController: UICollectionViewDelegate {
             let nextPageRequest = RecipeRequest(completeURL: nextPageURL)
             fetchNextPage(with: nextPageRequest)
         }
+    }
+}
+
+extension ResultViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForFooterInSection section: Int) -> CGSize {
+        return isFetching ? CGSize(width: view.frame.width, height: 100) : .zero
     }
 }

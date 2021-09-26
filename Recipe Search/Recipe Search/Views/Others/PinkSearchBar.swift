@@ -10,7 +10,7 @@ import UIKit
 class PinkSearchBar: UISearchBar {
     
     override func draw(_ rect: CGRect) {
-        searchTextField.backgroundColor = .systemPink
+        searchTextField.backgroundColor = .customPinkColor
         searchTextField.leftView?.tintColor = .white
         searchTextField.rightView?.tintColor = .white
         tintColor = .white

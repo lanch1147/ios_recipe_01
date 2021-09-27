@@ -10,9 +10,12 @@ import UIKit
 
 class UIImageLoader {
     static let shared = UIImageLoader()
+    private let serialAccessQueue = OperationQueue()
     private var imageMap = [UIImageView: UUID]()
     
-    private init() {}
+    private init() {
+        serialAccessQueue.maxConcurrentOperationCount = 1
+    }
     
     func load(_ url: URL, for imageView: UIImageView) {
         let imageRequest = ImageRequest(url: url)
@@ -25,17 +28,23 @@ class UIImageLoader {
             case .failure(let error):
                 print(error)
             }
-            self.imageMap.removeValue(forKey: imageView)
+            self.serialAccessQueue.addOperation {
+                self.imageMap.removeValue(forKey: imageView)
+            }
         }
         if let taskID = taskID {
-            imageMap[imageView] = taskID
+            self.serialAccessQueue.addOperation {
+                self.imageMap[imageView] = taskID
+            }
         }
     }
     
     func cancel(for imageView: UIImageView) {
-        if let taskID = imageMap[imageView] {
-            APIFetcher.shared.cancelTask(with: taskID)
-            imageMap.removeValue(forKey: imageView)
+        serialAccessQueue.addOperation {
+            if let taskID = self.imageMap[imageView] {
+                APIFetcher.shared.cancelTask(with: taskID)
+                self.imageMap.removeValue(forKey: imageView)
+            }
         }
     }
 }

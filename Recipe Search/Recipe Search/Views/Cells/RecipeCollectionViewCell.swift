@@ -14,7 +14,7 @@ final class RecipeCollectionViewCell: UICollectionViewCell, ReusableView, Recipe
     override func awakeFromNib() {
         super.awakeFromNib()
         imageView.layer.cornerRadius = 10
-        imageView.backgroundColor = UIColor(named: "UnselectedCellColor")
+        imageView.backgroundColor = .unselectedCellColor
     }
     
     func configure(with recipe: Recipe) {

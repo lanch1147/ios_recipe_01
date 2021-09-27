@@ -29,6 +29,9 @@
                                 <rect key="frame" x="182" y="0.0" width="20" height="39"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="x.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="removeButtonPressed:" destination="hIw-Pn-X0l" eventType="touchUpInside" id="fFb-Er-F5C"/>
+                                </connections>
                             </button>
                         </subviews>
                     </stackView>

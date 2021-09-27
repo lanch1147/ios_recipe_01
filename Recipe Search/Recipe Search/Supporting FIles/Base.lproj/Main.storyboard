@@ -153,6 +153,7 @@
                     <navigationItem key="navigationItem" id="qIV-nY-EUj"/>
                     <connections>
                         <outlet property="collectionView" destination="myg-hh-09k" id="OdI-7s-uGi"/>
+                        <segue destination="Fhb-VU-F6N" kind="show" identifier="ShowResultFromSearchSegue" destinationCreationSelector="viewResultScreen:sender:" id="Zrn-2S-nd6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQU-po-48H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -227,6 +228,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="Zrn-2S-nd6"/>
         <segue reference="CVy-cN-4ff"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -53,6 +53,7 @@
 		66F330BD27016D3A00AE9E6F /* SearchScreenReusableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66F330BB27016D3A00AE9E6F /* SearchScreenReusableHeader.xib */; };
 		66F330BE27016D3A00AE9E6F /* SearchScreenReusableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F330BC27016D3A00AE9E6F /* SearchScreenReusableHeader.swift */; };
 		66F330C327016DAD00AE9E6F /* SearchScreenSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F330C227016DAD00AE9E6F /* SearchScreenSection.swift */; };
+		66F330C72701A1C700AE9E6F /* SelectedFilterCollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F330C62701A1C600AE9E6F /* SelectedFilterCollectionViewCellDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		66F330BB27016D3A00AE9E6F /* SearchScreenReusableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchScreenReusableHeader.xib; sourceTree = "<group>"; };
 		66F330BC27016D3A00AE9E6F /* SearchScreenReusableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchScreenReusableHeader.swift; sourceTree = "<group>"; };
 		66F330C227016DAD00AE9E6F /* SearchScreenSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchScreenSection.swift; sourceTree = "<group>"; };
+		66F330C62701A1C600AE9E6F /* SelectedFilterCollectionViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFilterCollectionViewCellDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +305,7 @@
 				66F3300D26F984FE00AE9E6F /* ReusableViewProtocol.swift */,
 				66F3302E26FA208F00AE9E6F /* RecipeConfigurableCell+Protocol.swift */,
 				66F3308226FD6BF400AE9E6F /* HomeScreenReusableHeaderDelegate.swift */,
+				66F330C62701A1C600AE9E6F /* SelectedFilterCollectionViewCellDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				66F3300426F9762700AE9E6F /* UISearchBar+.swift in Sources */,
 				66F3307326FCDDE700AE9E6F /* UIImage+.swift in Sources */,
 				66F3301B26F9DAFE00AE9E6F /* RecipeRequest.swift in Sources */,
+				66F330C72701A1C700AE9E6F /* SelectedFilterCollectionViewCellDelegate.swift in Sources */,
 				66F3301226F9922400AE9E6F /* UICollectionView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

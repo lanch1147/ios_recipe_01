@@ -43,6 +43,7 @@ final class SearchViewController: UIViewController {
     }
     
     private func setupSearchBar() {
+        searchBar.delegate = self
         navigationItem.titleView = searchBar
         searchBar.becomeFirstResponder()
     }
@@ -50,6 +51,7 @@ final class SearchViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.allowsMultipleSelection = true
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.registerCell(ofType: SelectedFilterCollectionViewCell.self)
         collectionView.registerCell(ofType: FilterCollectionViewCell.self)
         collectionView.registerSupplementaryView(ofType: SearchScreenReusableHeader.self,
@@ -95,6 +97,14 @@ final class SearchViewController: UIViewController {
         }
         return layout
     }
+    
+    @IBSegueAction func viewResultScreen(_ coder: NSCoder, sender: Any?) -> ResultViewController? {
+        let text = searchBar.text
+        let selectedCategories = sections[0].filters
+        let request = RecipeRequest(recipeName: text, categories: selectedCategories)
+        let tilte = "Results for \"\(text ?? "")\""
+        return ResultViewController(coder: coder, initalRequest: request, title: tilte)
+    }
 }
 
 extension SearchViewController: UICollectionViewDataSource {
@@ -122,6 +132,7 @@ extension SearchViewController: UICollectionViewDataSource {
         if indexPath.section == 0 {
             let cell = collectionView.dequeueCell(ofType: SelectedFilterCollectionViewCell.self, at: indexPath)
             cell.configure(with: item)
+            cell.delegate = self
             return cell
         } else {
             let cell = collectionView.dequeueCell(ofType: FilterCollectionViewCell.self, at: indexPath)
@@ -136,5 +147,48 @@ extension SearchViewController: UICollectionViewDataSource {
                                                 at: indexPath)
         header.configure(with: sections[indexPath.section].name)
         return header
+    }
+}
+
+extension SearchViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return indexPath.section != 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedItem = sections[indexPath.section].filters[indexPath.item]
+        sections[0].filters.append(selectedItem)
+        let indexPath = IndexPath(item: sections[0].filters.count - 1, section: 0)
+        collectionView.insertItems(at: [indexPath])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let unselectedItem = sections[indexPath.section].filters[indexPath.item]
+        if let removeIndex = sections[0].filters.firstIndex(where: { $0.name() == unselectedItem.name() }) {
+            sections[0].filters.remove(at: removeIndex)
+            let indexPath = IndexPath(item: removeIndex, section: 0)
+            collectionView.deleteItems(at: [indexPath])
+        }
+    }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        performSegue(withIdentifier: "ShowResultFromSearchSegue", sender: searchBar)
+    }
+}
+
+extension SearchViewController: SelectedFilterCollectionViewCellDelegate {
+    func didSelectRemoveButton(at cell: SelectedFilterCollectionViewCell) {
+        guard let removeIndexPath = collectionView.indexPath(for: cell) else { return }
+        let removeItem = sections[removeIndexPath.section].filters[removeIndexPath.item]
+        sections[removeIndexPath.section].filters.remove(at: removeIndexPath.item)
+        collectionView.deleteItems(at: [removeIndexPath])
+        collectionView.indexPathsForSelectedItems?.forEach { indexPath in
+            let item = sections[indexPath.section].filters[indexPath.item]
+            if item.name() == removeItem.name() {
+                self.collectionView.deselectItem(at: indexPath, animated: true)
+            }
+        }
     }
 }

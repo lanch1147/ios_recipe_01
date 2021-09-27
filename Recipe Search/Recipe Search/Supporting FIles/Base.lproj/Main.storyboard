@@ -53,7 +53,7 @@
         <!--Recipe Detail View Controller-->
         <scene sceneID="Fjk-3l-LnM">
             <objects>
-                <viewController id="ztN-YJ-f45" customClass="RecipeDetailViewController" customModule="Recipe_Search" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipeDetailViewController" id="ztN-YJ-f45" customClass="RecipeDetailViewController" customModule="Recipe_Search" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sYw-Bn-qSE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,12 +64,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TKr-Pb-awK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2512" y="497"/>
+            <point key="canvasLocation" x="2512" y="520"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="bhp-fa-gG9">
             <objects>
-                <viewController id="Fhb-VU-F6N" customClass="ResultViewController" customModule="Recipe_Search" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResultViewController" id="Fhb-VU-F6N" customClass="ResultViewController" customModule="Recipe_Search" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sDc-jG-WX9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,6 +98,7 @@
                     <navigationItem key="navigationItem" id="LZp-nk-zD8"/>
                     <connections>
                         <outlet property="collectionView" destination="m6J-jB-87Q" id="uYo-13-I8X"/>
+                        <segue destination="ztN-YJ-f45" kind="show" identifier="ShowDetailFromResultSegue" destinationCreationSelector="viewRecipeDetailScreen:sender:" id="CVy-cN-4ff"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDZ-lU-L6Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -203,6 +204,9 @@
             <point key="canvasLocation" x="-281.15942028985512" y="443.30357142857139"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="CVy-cN-4ff"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>

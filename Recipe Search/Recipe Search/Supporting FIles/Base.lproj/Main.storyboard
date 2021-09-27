@@ -128,10 +128,32 @@
                     <view key="view" contentMode="scaleToFill" id="iz5-qr-zbV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="myg-hh-09k">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zr2-tW-NOk">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="UaE-ga-wX7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UaE-ga-wX7" firstAttribute="bottom" secondItem="myg-hh-09k" secondAttribute="bottom" id="5Zm-8W-aq1"/>
+                            <constraint firstItem="myg-hh-09k" firstAttribute="leading" secondItem="UaE-ga-wX7" secondAttribute="leading" id="6Mr-Mz-cEF"/>
+                            <constraint firstItem="myg-hh-09k" firstAttribute="top" secondItem="UaE-ga-wX7" secondAttribute="top" id="OwG-jQ-Jdv"/>
+                            <constraint firstItem="UaE-ga-wX7" firstAttribute="trailing" secondItem="myg-hh-09k" secondAttribute="trailing" id="PeW-BU-mV9"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qIV-nY-EUj"/>
+                    <connections>
+                        <outlet property="collectionView" destination="myg-hh-09k" id="OdI-7s-uGi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQU-po-48H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeDetailCollectionViewCell" id="gTV-IL-0wX" customClass="RecipeDetailCollectionViewCell" customModule="Recipe_Search" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="515" height="65"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="515" height="65"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="meK-tv-k89">
+                        <rect key="frame" x="30" y="8" width="455" height="46"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Item" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moA-pc-06r">
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" text="Quantity" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7P-Qi-GRk">
+                                <rect key="frame" x="390" y="0.0" width="65" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zgd-Sa-Vcp">
+                        <rect key="frame" x="30" y="59" width="455" height="1"/>
+                        <color key="backgroundColor" name="SubtitleColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="D5b-UN-9Fh"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="Zgd-Sa-Vcp" firstAttribute="leading" secondItem="meK-tv-k89" secondAttribute="leading" id="18H-qQ-AMC"/>
+                <constraint firstItem="Zgd-Sa-Vcp" firstAttribute="trailing" secondItem="meK-tv-k89" secondAttribute="trailing" id="Lfb-ac-1zH"/>
+                <constraint firstItem="Zgd-Sa-Vcp" firstAttribute="top" secondItem="meK-tv-k89" secondAttribute="bottom" constant="5" id="Ruq-Eg-S6f"/>
+                <constraint firstAttribute="bottom" secondItem="Zgd-Sa-Vcp" secondAttribute="bottom" constant="5" id="hxQ-DQ-Baf"/>
+                <constraint firstAttribute="trailing" secondItem="meK-tv-k89" secondAttribute="trailing" constant="30" id="qf2-oo-PtC"/>
+                <constraint firstItem="meK-tv-k89" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="rgX-c5-ls1"/>
+                <constraint firstItem="meK-tv-k89" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="wOP-Jj-DLN"/>
+            </constraints>
+            <size key="customSize" width="515" height="65"/>
+            <connections>
+                <outlet property="quantityLabel" destination="Z7P-Qi-GRk" id="hFO-kJ-sT4"/>
+                <outlet property="titleLabel" destination="moA-pc-06r" id="RGb-mO-2WI"/>
+            </connections>
+            <point key="canvasLocation" x="-193.47826086956522" y="-17.745535714285712"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="SubtitleColor">
+            <color red="0.58799999952316284" green="0.62400001287460327" blue="0.66699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

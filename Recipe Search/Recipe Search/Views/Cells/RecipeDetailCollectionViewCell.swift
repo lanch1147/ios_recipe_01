@@ -15,13 +15,13 @@ final class RecipeDetailCollectionViewCell: UICollectionViewCell, ReusableView {
         super.awakeFromNib()
     }
     
-    func configure(with ingredient: String, numServings: Int) {
+    func configure(with ingredient: String) {
         titleLabel.text = ingredient
         quantityLabel.text = nil
     }
 
-    func configure(with nutrient: Nutrient, numServings: Int) {
+    func configure(with nutrient: Nutrient) {
         titleLabel.text = nutrient.name
-        quantityLabel.text = String(format: "%.1f", nutrient.quantity * Double(numServings)) + " \(nutrient.unit)"
+        quantityLabel.text = String(format: "%.1f", nutrient.quantity) + " \(nutrient.unit)"
     }
 }

@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -61,7 +62,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="g0g-5u-71t">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="E7V-tq-pjC">
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mij-J6-rfn">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -69,19 +70,48 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQO-Ap-jvf">
+                                <rect key="frame" x="62" y="749.5" width="290" height="43.5"/>
+                                <color key="backgroundColor" name="CustomPinkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hQO-Ap-jvf" secondAttribute="height" multiplier="20:3" id="fSz-vG-7WB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Cook">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedCookButton:" destination="ztN-YJ-f45" eventType="touchUpInside" id="F17-2W-KBn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Gv2-yk-8fP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Gv2-yk-8fP" firstAttribute="trailing" secondItem="g0g-5u-71t" secondAttribute="trailing" id="2jN-ip-Ok3"/>
+                            <constraint firstItem="hQO-Ap-jvf" firstAttribute="width" secondItem="Gv2-yk-8fP" secondAttribute="width" multiplier="0.7" id="8DA-Ba-B2a"/>
                             <constraint firstItem="g0g-5u-71t" firstAttribute="leading" secondItem="Gv2-yk-8fP" secondAttribute="leading" id="MJs-st-oAg"/>
+                            <constraint firstItem="Gv2-yk-8fP" firstAttribute="bottom" secondItem="hQO-Ap-jvf" secondAttribute="bottom" constant="20" id="dBG-oX-8Yz"/>
                             <constraint firstItem="g0g-5u-71t" firstAttribute="top" secondItem="Gv2-yk-8fP" secondAttribute="top" id="dvW-ac-Dtp"/>
+                            <constraint firstItem="hQO-Ap-jvf" firstAttribute="centerX" secondItem="sYw-Bn-qSE" secondAttribute="centerX" id="gJw-XV-Gu3"/>
                             <constraint firstItem="Gv2-yk-8fP" firstAttribute="bottom" secondItem="g0g-5u-71t" secondAttribute="bottom" id="kb2-Z7-VwP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="aDK-3B-eZ7"/>
+                    <navigationItem key="navigationItem" id="aDK-3B-eZ7">
+                        <barButtonItem key="rightBarButtonItem" id="Wvg-mI-GqQ">
+                            <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                            <color key="tintColor" name="CustomPinkColor"/>
+                            <connections>
+                                <action selector="pressedHeartButton:" destination="ztN-YJ-f45" id="gMV-8O-jqo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="g0g-5u-71t" id="nrg-LQ-Q3A"/>
+                        <outlet property="cookButton" destination="hQO-Ap-jvf" id="hpq-qG-ORX"/>
+                        <outlet property="heartButtonItem" destination="Wvg-mI-GqQ" id="yFm-KJ-VmF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TKr-Pb-awK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -254,8 +284,12 @@
         <segue reference="CVy-cN-4ff"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
+        <namedColor name="CustomPinkColor">
+            <color red="1" green="0.37999999523162842" blue="0.42699998617172241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

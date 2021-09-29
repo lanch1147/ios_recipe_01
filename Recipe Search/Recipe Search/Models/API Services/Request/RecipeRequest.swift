@@ -19,6 +19,7 @@ struct RecipeRequest: APIRequest {
         case calories
         case totalNutrients
         case ingredientLines
+        case yield
         
         func toQueryItem() -> URLQueryItem {
             return URLQueryItem(name: "field", value: self.rawValue)

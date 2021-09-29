@@ -6,17 +6,19 @@
 //
 
 import UIKit
+import SafariServices
 
 final class RecipeDetailViewController: UIViewController {
+    @IBOutlet private weak var heartButtonItem: UIBarButtonItem!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var cookButton: UIButton!
     
     private var recipe: Recipe
-    private var numServings = 1
+    private var isLiked = false
     
     private enum SupplementKind: String {
         case ingredientHeader
         case nutrientHeader
-        case nutrientFooter
     }
     
     private enum LayoutOptions {
@@ -24,6 +26,7 @@ final class RecipeDetailViewController: UIViewController {
                                                             heightDimension: .estimated(600))
         static let standardHeaderFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                                      heightDimension: .estimated(30))
+        static let cookButtonBottomPadding: CGFloat = 20
     }
     
     init?(coder: NSCoder, recipe: Recipe) {
@@ -37,17 +40,12 @@ final class RecipeDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupHeartButton()
+        setupButtons()
         setupCollectionView()
     }
     
-    private func setupHeartButton(isLiked: Bool = false) {
-        let config = UIImage.SymbolConfiguration(scale: .large)
-        let imageName = isLiked ? "heart.fill" : "heart"
-        let heartIcon = UIImage(systemName: imageName, withConfiguration: config)
-        let heartButtonItem = UIBarButtonItem(image: heartIcon, style: .plain, target: nil, action: nil)
-        heartButtonItem.tintColor = .customPinkColor
-        navigationItem.rightBarButtonItem = heartButtonItem
+    private func setupButtons() {
+        cookButton.layer.cornerRadius = cookButton.frame.height / 4
     }
     
     private func setupCollectionView() {
@@ -57,9 +55,10 @@ final class RecipeDetailViewController: UIViewController {
                                                  forKind: SupplementKind.ingredientHeader.rawValue)
         collectionView.registerSupplementaryView(ofType: NutrientSectionReusableHeader.self,
                                                  forKind: SupplementKind.nutrientHeader.rawValue)
-        collectionView.registerSupplementaryView(ofType: NutrientSectionReusableFooter.self,
-                                                 forKind: SupplementKind.nutrientFooter.rawValue)
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
+        DispatchQueue.main.async {
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        }
     }
     
     private func generateIngredientHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
@@ -78,15 +77,6 @@ final class RecipeDetailViewController: UIViewController {
         return header
     }
     
-    private func generateNutrientFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let footerSize = LayoutOptions.standardHeaderFooterSize
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize,
-                                                                 elementKind: SupplementKind.nutrientFooter.rawValue,
-                                                                 alignment: .bottom)
-        footer.pinToVisibleBounds = true
-        return footer
-    }
-    
     private func generateListSection(with items: [NSCollectionLayoutBoundarySupplementaryItem]) -> NSCollectionLayoutSection {
         let itemSize = LayoutOptions.standardHeaderFooterSize
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -103,11 +93,30 @@ final class RecipeDetailViewController: UIViewController {
                 return self.generateListSection(with: [header])
             } else {
                 let header = self.generateNutrientHeader()
-                let footer = self.generateNutrientFooter()
-                return self.generateListSection(with: [footer, header])
+                let section = self.generateListSection(with: [header])
+                let bottomPadding = self.cookButton.frame.height + LayoutOptions.cookButtonBottomPadding * 2
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                                leading: 0,
+                                                                bottom: bottomPadding,
+                                                                trailing: 0)
+                return section
             }
         }
         return layout
+    }
+    
+    @IBAction func pressedHeartButton(_ sender: UIBarButtonItem) {
+        isLiked = !isLiked
+        let symbolName = isLiked ? "heart.fill" : "heart"
+        heartButtonItem.image = UIImage(systemName: symbolName)
+    }
+    
+    @IBAction func pressedCookButton(_ sender: UIButton) {
+        guard let url = recipe.sourceURL else { return }
+        let config = SFSafariViewController.Configuration()
+        config.entersReaderIfAvailable = true
+        let safariVC = SFSafariViewController(url: url)
+        present(safariVC, animated: true)
     }
 }
 
@@ -123,8 +132,8 @@ extension RecipeDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueCell(ofType: RecipeDetailCollectionViewCell.self, at: indexPath)
         indexPath.section == 0
-            ? cell.configure(with: recipe.ingredients[indexPath.item], numServings: numServings)
-            : cell.configure(with: recipe.nutrients[indexPath.item], numServings: numServings)
+            ? cell.configure(with: recipe.ingredients[indexPath.item])
+            : cell.configure(with: recipe.nutrients[indexPath.item])
         return cell
     }
     
@@ -136,18 +145,13 @@ extension RecipeDetailViewController: UICollectionViewDataSource {
             let header = collectionView.dequeueView(ofType: IngredientSectionReusableHeader.self,
                                                     forKind: kind,
                                                     at: indexPath)
-            header.configure(with: recipe, numServings: numServings)
+            header.configure(with: recipe)
             return header
         case SupplementKind.nutrientHeader.rawValue:
             let header = collectionView.dequeueView(ofType: NutrientSectionReusableHeader.self,
                                                     forKind: kind,
                                                     at: indexPath)
             return header
-        case SupplementKind.nutrientFooter.rawValue:
-            let footer = collectionView.dequeueView(ofType: NutrientSectionReusableFooter.self,
-                                                    forKind: kind,
-                                                    at: indexPath)
-            return footer
         default:
             fatalError("There is no supplementary view for kind \(kind)")
         }

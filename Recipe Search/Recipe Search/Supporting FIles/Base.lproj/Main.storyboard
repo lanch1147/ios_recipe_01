@@ -57,10 +57,32 @@
                     <view key="view" contentMode="scaleToFill" id="sYw-Bn-qSE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="g0g-5u-71t">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="E7V-tq-pjC">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Gv2-yk-8fP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Gv2-yk-8fP" firstAttribute="trailing" secondItem="g0g-5u-71t" secondAttribute="trailing" id="2jN-ip-Ok3"/>
+                            <constraint firstItem="g0g-5u-71t" firstAttribute="leading" secondItem="Gv2-yk-8fP" secondAttribute="leading" id="MJs-st-oAg"/>
+                            <constraint firstItem="g0g-5u-71t" firstAttribute="top" secondItem="Gv2-yk-8fP" secondAttribute="top" id="dvW-ac-Dtp"/>
+                            <constraint firstItem="Gv2-yk-8fP" firstAttribute="bottom" secondItem="g0g-5u-71t" secondAttribute="bottom" id="kb2-Z7-VwP"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aDK-3B-eZ7"/>
+                    <connections>
+                        <outlet property="collectionView" destination="g0g-5u-71t" id="nrg-LQ-Q3A"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TKr-Pb-awK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

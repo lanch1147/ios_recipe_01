@@ -24,10 +24,11 @@ final class IngredientSectionReusableHeader: UICollectionReusableView, ReusableV
         imageView.image = nil
     }
     
-    func configure(with recipe: Recipe, numServings: Int) {
+    func configure(with recipe: Recipe) {
         recipeNameLabel.text = recipe.name
         sourceNameLabel.text = "by \(recipe.sourceName)"
-        numServingsLabel.text = "\(numServings) servings"
+        let text = recipe.defaultNumServings == 1 ? "serving" : "servings"
+        numServingsLabel.text = "\(recipe.defaultNumServings) \(text)"
         guard let url = recipe.imageURL else { return }
         imageView.load(with: url)
     }

@@ -13,6 +13,7 @@ struct Recipe: Decodable {
     var imageURL: URL?
     var sourceName: String
     var sourceURL: URL?
+    var defaultNumServings: Int
     var ingredients: [String]
     var nutrients = [Nutrient]()
     
@@ -26,6 +27,7 @@ struct Recipe: Decodable {
         case imageURL = "image"
         case sourceName = "source"
         case sourceURL = "url"
+        case defaultNumServings = "yield"
         case ingredients = "ingredientLines"
         case nutrientContainer = "totalNutrients"
     }
@@ -39,6 +41,7 @@ struct Recipe: Decodable {
         imageURL = try recipeContainer.decode(URL?.self, forKey: .imageURL)
         sourceName = try recipeContainer.decode(String.self, forKey: .sourceName)
         sourceURL = try recipeContainer.decode(URL?.self, forKey: .sourceURL)
+        defaultNumServings = try recipeContainer.decode(Int.self, forKey: .defaultNumServings)
         ingredients = try recipeContainer.decode([String].self, forKey: .ingredients)
         
         let nutrientContainer = try recipeContainer.nestedContainer(keyedBy: Nutrient.NutrientOuterKeys.self,

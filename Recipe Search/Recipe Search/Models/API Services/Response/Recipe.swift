@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Recipe: Decodable {
+struct Recipe {
     var identifier: String
     var name: String
     var imageURL: URL?
@@ -16,7 +16,9 @@ struct Recipe: Decodable {
     var defaultNumServings: Int
     var ingredients: [String]
     var nutrients = [Nutrient]()
-    
+}
+
+extension Recipe: Decodable {
     enum OuterKeys: String, CodingKey {
         case recipeContainer = "recipe"
     }
@@ -49,6 +51,23 @@ struct Recipe: Decodable {
         for key in Nutrient.NutrientOuterKeys.allCases {
             let nutrient = try nutrientContainer.decode(Nutrient.self, forKey: key)
             nutrients.append(nutrient)
+        }
+    }
+}
+
+extension Recipe {
+    init(from model: RecipeCoreData) {
+        identifier = model.identifier ?? ""
+        name = model.name ?? ""
+        imageURL = model.imageURL
+        sourceName = model.sourceName ?? ""
+        sourceURL = model.sourceURL
+        defaultNumServings = Int(model.defaultNumServings)
+        let ingredientModels = model.ingredients?.array as? [IngredientCoreData] ?? []
+        let nutrientModels = model.nutrients?.array as? [NutrientCoreData] ?? []
+        ingredients = ingredientModels.map { $0.detail ?? "" }
+        nutrients = nutrientModels.map {
+            Nutrient(from: $0)
         }
     }
 }

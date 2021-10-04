@@ -44,6 +44,12 @@ final class RecipeDetailViewController: UIViewController {
         setupCollectionView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        isLiked = CoreDataManager.shared.isStored(recipeID: recipe.identifier)
+        updateHeartButtonAppearance()
+    }
+    
     private func setupButtons() {
         cookButton.layer.cornerRadius = cookButton.frame.height / 4
     }
@@ -105,10 +111,43 @@ final class RecipeDetailViewController: UIViewController {
         return layout
     }
     
-    @IBAction func pressedHeartButton(_ sender: UIBarButtonItem) {
-        isLiked = !isLiked
+    private func updateHeartButtonAppearance() {
         let symbolName = isLiked ? "heart.fill" : "heart"
         heartButtonItem.image = UIImage(systemName: symbolName)
+    }
+    
+    private func presentRemoveAlert() {
+        let alertVC = UIAlertController(title: "Do you want to remove this recipe ?",
+                                                message: nil,
+                                                preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let removeAction = UIAlertAction(title: "Remove", style: .destructive) { _ in
+            CoreDataManager.shared.delete(recipeID: self.recipe.identifier)
+            self.presentBasicAlert(withTitle: "Removed Successfully",
+                                   message: "\"\(self.recipe.name)\" has been removed")
+        }
+        alertVC.addAction(cancelAction)
+        alertVC.addAction(removeAction)
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    
+    private func presentSaveAlert() {
+        do {
+            try CoreDataManager.shared.save(recipe: recipe)
+            presentBasicAlert(withTitle: "Saved Successfully",
+                              message: "\"\(recipe.name)\" has been saved")
+        } catch let error as NSError {
+            presentBasicAlert(withTitle: "Failed",
+                              message: "Cannot save recipe \(recipe.name)")
+            print("Saving error: \(error)")
+            return
+        }
+    }
+    
+    @IBAction func pressedHeartButton(_ sender: UIBarButtonItem) {
+        isLiked ? presentRemoveAlert() : presentSaveAlert()
+        isLiked = !isLiked
+        updateHeartButtonAppearance()
     }
     
     @IBAction func pressedCookButton(_ sender: UIButton) {

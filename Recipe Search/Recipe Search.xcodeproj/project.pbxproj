@@ -17,8 +17,9 @@
 		6682F06726F04CF3008264AF /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682F06426F04CF3008264AF /* Recipe.swift */; };
 		6682F06826F04CF3008264AF /* Nutrient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682F06526F04CF3008264AF /* Nutrient.swift */; };
 		6682F06926F04CF3008264AF /* RecipeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6682F06626F04CF3008264AF /* RecipeResponse.swift */; };
-		66EFEA4527070C5A00954CA9 /* RecipeSearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66EFEA4327070C5A00954CA9 /* RecipeSearch.xcdatamodeld */; };
 		66EFEA4927070C6B00954CA9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EFEA4827070C6B00954CA9 /* CoreDataManager.swift */; };
+		66EFEA5D270A8DC900954CA9 /* RecipeSearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66EFEA5B270A8DC900954CA9 /* RecipeSearch.xcdatamodeld */; };
+		66EFEA6A270A961600954CA9 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EFEA69270A961600954CA9 /* UIViewController+.swift */; };
 		66F32FDD26F85CBE00AE9E6F /* APIFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F32FDC26F85CBE00AE9E6F /* APIFetcher.swift */; };
 		66F32FE126F85CE000AE9E6F /* APIRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F32FE026F85CE000AE9E6F /* APIRequestProtocol.swift */; };
 		66F32FF226F880E500AE9E6F /* LargeRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F32FEE26F880E500AE9E6F /* LargeRecipeCollectionViewCell.swift */; };
@@ -76,8 +77,9 @@
 		6682F06426F04CF3008264AF /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		6682F06526F04CF3008264AF /* Nutrient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nutrient.swift; sourceTree = "<group>"; };
 		6682F06626F04CF3008264AF /* RecipeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeResponse.swift; sourceTree = "<group>"; };
-		66EFEA4427070C5A00954CA9 /* RecipeSearch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecipeSearch.xcdatamodel; sourceTree = "<group>"; };
 		66EFEA4827070C6B00954CA9 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		66EFEA5C270A8DC900954CA9 /* RecipeSearch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecipeSearch.xcdatamodel; sourceTree = "<group>"; };
+		66EFEA69270A961600954CA9 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		66F32FDC26F85CBE00AE9E6F /* APIFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetcher.swift; sourceTree = "<group>"; };
 		66F32FE026F85CE000AE9E6F /* APIRequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestProtocol.swift; sourceTree = "<group>"; };
 		66F32FEE26F880E500AE9E6F /* LargeRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeRecipeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -221,7 +223,7 @@
 		6682F01F26EF374A008264AF /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				66EFEA4327070C5A00954CA9 /* RecipeSearch.xcdatamodeld */,
+				66EFEA5B270A8DC900954CA9 /* RecipeSearch.xcdatamodeld */,
 				66EFEA4827070C6B00954CA9 /* CoreDataManager.swift */,
 			);
 			path = "Core Data";
@@ -303,6 +305,7 @@
 		66F3300226F975A500AE9E6F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				66EFEA69270A961600954CA9 /* UIViewController+.swift */,
 				66F3300326F9762700AE9E6F /* UISearchBar+.swift */,
 				66F3301126F9922400AE9E6F /* UICollectionView+.swift */,
 				66F3307226FCDDE700AE9E6F /* UIImage+.swift */,
@@ -468,12 +471,12 @@
 				6682F00326EF363F008264AF /* HomeViewController.swift in Sources */,
 				6682F06826F04CF3008264AF /* Nutrient.swift in Sources */,
 				66F3302C26FA006F00AE9E6F /* HomeScreenSection.swift in Sources */,
-				66EFEA4527070C5A00954CA9 /* RecipeSearch.xcdatamodeld in Sources */,
 				66F330BE27016D3A00AE9E6F /* SearchScreenReusableHeader.swift in Sources */,
 				66F3300E26F984FE00AE9E6F /* ReusableViewProtocol.swift in Sources */,
 				6682F06926F04CF3008264AF /* RecipeResponse.swift in Sources */,
 				66F330C327016DAD00AE9E6F /* SearchScreenSection.swift in Sources */,
 				66F3308326FD6BF400AE9E6F /* HomeScreenReusableHeaderDelegate.swift in Sources */,
+				66EFEA6A270A961600954CA9 /* UIViewController+.swift in Sources */,
 				66F3301A26F9DAFE00AE9E6F /* ImageRequest.swift in Sources */,
 				66F32FFD26F8875D00AE9E6F /* HomeScreenReusableHeader.swift in Sources */,
 				66F3302F26FA208F00AE9E6F /* RecipeConfigurableCell+Protocol.swift in Sources */,
@@ -486,6 +489,7 @@
 				66F32FE126F85CE000AE9E6F /* APIRequestProtocol.swift in Sources */,
 				6682F02526EF4B00008264AF /* SceneDelegate.swift in Sources */,
 				6682F06726F04CF3008264AF /* Recipe.swift in Sources */,
+				66EFEA5D270A8DC900954CA9 /* RecipeSearch.xcdatamodeld in Sources */,
 				6682F05326F03670008264AF /* FavoriteViewController.swift in Sources */,
 				66F3309426FE143E00AE9E6F /* LoadingReusableFooter.swift in Sources */,
 				66F32FF226F880E500AE9E6F /* LargeRecipeCollectionViewCell.swift in Sources */,
@@ -705,14 +709,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		66EFEA4327070C5A00954CA9 /* RecipeSearch.xcdatamodeld */ = {
+		66EFEA5B270A8DC900954CA9 /* RecipeSearch.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				66EFEA4427070C5A00954CA9 /* RecipeSearch.xcdatamodel */,
+				66EFEA5C270A8DC900954CA9 /* RecipeSearch.xcdatamodel */,
 			);
-			currentVersion = 66EFEA4427070C5A00954CA9 /* RecipeSearch.xcdatamodel */;
-			name = RecipeSearch.xcdatamodeld;
-			path = "../../../../../ios_recipe_01 copy 2/Recipe Search/Recipe Search/Models/Core Data/RecipeSearch.xcdatamodeld";
+			currentVersion = 66EFEA5C270A8DC900954CA9 /* RecipeSearch.xcdatamodel */;
+			path = RecipeSearch.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

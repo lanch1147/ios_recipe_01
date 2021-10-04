@@ -29,3 +29,11 @@ struct Nutrient: Decodable {
         case water = "WATER"
     }
 }
+
+extension Nutrient {
+    init(from model: NutrientCoreData) {
+        name = model.name ?? ""
+        quantity = model.quantity
+        unit = model.unit ?? "''"
+    }
+}
